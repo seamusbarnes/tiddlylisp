@@ -8,7 +8,7 @@
 
 import sys
 import traceback
-
+import operator 
 #### Symbol, Env classes
 
 Symbol = str
@@ -27,6 +27,19 @@ class Env(dict):
 def add_globals(env):
     "Add some built-in procedures and variables to the environment."
     import operator
+
+    def square(x):
+        return x**2
+    
+    def cube(x):
+        return x**3
+    
+    def area(x, y):
+        return x * y
+    
+    def volume(x, y, z):
+        return x*y*z
+    
     env.update(
         {'+': operator.add,
          '-': operator.sub, 
@@ -36,7 +49,11 @@ def add_globals(env):
          '<': operator.lt, 
          '>=': operator.ge, 
          '<=': operator.le, 
-         '=': operator.eq
+         '=': operator.eq,
+         'square': square,
+         'cube': cube,
+         'area': area,
+         'volume': volume
          })
     env.update({'True': True, 'False': False})
     return env
